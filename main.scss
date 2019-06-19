@@ -1,0 +1,15 @@
+@import "components/basic_scss/reset";
+@import "components/basic_scss/fonts";
+@import "components/basic_scss/variables";
+
+@import "components/header/header";
+
+@import "components/app/app";
+@import "components/sidebar/sidebar";
+
+@import "components/footer/footer";
+
+#app{
+  width: 100vw;
+  height: 100vh;
+}
