@@ -45,6 +45,16 @@ module.exports = {
                     // Przetworzenie plików .scss ma CSS
                     'sass-loader'
                 ]
+            },{
+                test: /\.(jpg|jpeg|gif|png|csv)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        publicPath: 'images',
+                        outputPath: 'images'
+                    }
+                }
             }]
     },
     plugins: [

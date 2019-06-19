@@ -17,7 +17,7 @@ class Header extends Component {
         return (
             <header className='main-width'>
                 <div className="header_flex">
-                    <div className='header_logoArea'><Logo /><p>Peterson IPSUM</p><Bookmark/></div>
+                    <div className='header_logoArea'><Logo /><h1>Jordan B. Peterson IPSUM</h1><Bookmark/></div>
                         <div className='header_nav_container'><ul className='header_nav'>
                             <li><a href='#'>IPSUM</a></li>
                             <li><a href='#'>IMAGES</a></li>

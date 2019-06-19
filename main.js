@@ -11,6 +11,6 @@ import Footer from './components/footer/footer.js'
 
 ReactDOM.render(<>
     <Header/>
-    <section className='main-width' style={{height:'500px'}}><App/></section>
+    <section className='main-width app_section' style={{height:'500px'}}><App/></section>
     <Footer/>
-    </>, document.getElementById('app'));
+    </>, document.getElementById('page'));

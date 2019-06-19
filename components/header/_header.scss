@@ -21,11 +21,12 @@
 }
 
 .header_logoArea {
-  width: 50%;
+  width: 60%;
   display: flex;
   justify-content: space-between;
   min-width: 450px;
-  p{
+
+  h1 {
     padding: 20px;
     @include RulesFont;
   }
@@ -38,7 +39,7 @@
 }
 
 .header_nav_container {
-  width: 50%;
+  width: 40%;
   min-width: 450px;
 }
 
