@@ -7,9 +7,11 @@ Functionality:
 
 Future plans:
 1. Placeholder image generator
+2. Media queries (Only desktop now)
 
 The app uses:
 
 1. ES6
 2. React
 3. Scss
+4. Firebase Realtime Database
