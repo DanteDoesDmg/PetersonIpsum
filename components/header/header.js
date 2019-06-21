@@ -3,7 +3,7 @@ import React, {Component} from "react";
 
 function Logo() {
 
-    return <a className='logo' href='https://www.jordanbpeterson.com/'><img src='../../images/mapIcon.webp'/></a>
+    return <a className='logo' href='https://www.jordanbpeterson.com/'><img src='../../images/mapsOfMeaning.png'/></a>
 
 }
 function Bookmark() {
