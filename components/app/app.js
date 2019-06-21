@@ -1,18 +1,5 @@
 import React, {Component} from "react";
 
-// Your web app's Firebase configuration
-var firebaseConfig = {
-    apiKey: "AIzaSyDzZZ0pbe7BF925-hnQCQAkiq3vCKO3oYQ",
-    authDomain: "petersonipsum.firebaseapp.com",
-    databaseURL: "https://petersonipsum.firebaseio.com",
-    projectId: "petersonipsum",
-    storageBucket: "",
-    messagingSenderId: "1058556797505",
-    appId: "1:1058556797505:web:22b5a30dbbff6fdd"
-};
-
-// Initialize Firebase
-
 
 class TextOutput extends Component {
 
@@ -109,7 +96,7 @@ class App extends Component {
             .then(response => response.json())
             .then(data => {
                 this.setState({
-                    paragraphs: data.paragraphs
+                    paragraphs: data.paragraphs,
                 });
             }).catch(err => {
             console.log(err)
@@ -117,7 +104,7 @@ class App extends Component {
     }
 
     generateIpsum = (number, type) => {
-        const {paragraphs, textOutputElement} = this.state;
+        const {paragraphs} = this.state;
         let generatedText, textToCopy;
 
         switch (type) {

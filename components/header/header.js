@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-
+import LogoImg from '../../images/mapsOfMeaning.png';
 
 function Logo() {
 
-    return <a className='logo' href='https://www.jordanbpeterson.com/'><img src='../../images/mapsOfMeaning.png'/></a>
+    return <a className='logo' href='https://www.jordanbpeterson.com/'><img src='./images/mapsOfMeaning.png'/></a>
 
 }
 function Bookmark() {
