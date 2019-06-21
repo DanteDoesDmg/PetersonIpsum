@@ -103,6 +103,18 @@ class App extends Component {
         })
     }
 
+    getRandomString(separator){
+        let string = '';
+        for (let i = 0; i < number; i++) {
+            let randParagNum = Math.round(Math.random() * (paragraphs.length - 1)),
+                randParag = paragraphs[randParagNum];
+            let splitParag = randParag.split('. '),
+                randSentenceNum = Math.round(Math.random() * (splitParag.length - 2));      //last one is an empty string so -2
+            string = generatedText + splitParag[randSentenceNum] + separator
+
+        }
+        return string
+    }
     generateIpsum = (number, type) => {
         const {paragraphs} = this.state;
         let generatedText, textToCopy;
@@ -137,14 +149,8 @@ class App extends Component {
             }
             case  1: {                                           //sentences
                 generatedText = '';
-                for (let i = 0; i < number; i++) {
-                let randParagNum = Math.round(Math.random() * (paragraphs.length - 1)),
-                    randParag = paragraphs[randParagNum];
-                let splitParag = randParag.split('. '),
-                    randSentenceNum = Math.round(Math.random() * (splitParag.length - 2));      //last one is an empty string so -2
-                    generatedText = generatedText + splitParag[randSentenceNum] + '. '
+                generatedText = this.getRandomString('. ');
 
-                }
                 this.setState({
                     displayText: generatedText,
                     textToCopy: generatedText,
@@ -153,14 +159,7 @@ class App extends Component {
             }
             case  2: {                                          //words
                 generatedText = '';
-                for (let i = 0; i < number; i++) {
-                    let randParagNum = Math.round(Math.random() * (paragraphs.length - 1)),
-                        randParag = paragraphs[randParagNum];
-                    let splitParag = randParag.split(' '),
-                        randSentenceNum = Math.round(Math.random() * (splitParag.length - 2));      //last one is an empty string so -2
-                    generatedText = generatedText + splitParag[randSentenceNum] + ' '
-
-                }
+                generatedText = this.getRandomString(' ');
                 this.setState({
                     displayText: generatedText,
                     textToCopy: generatedText,
