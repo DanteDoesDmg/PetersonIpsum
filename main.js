@@ -8,7 +8,6 @@ import Footer from './components/footer/footer.js'
 
 
 
-
 ReactDOM.render(<>
     <Header/>
     <section className='main-width app_section' style={{height:'500px'}}><App/></section>
