@@ -103,18 +103,19 @@ class App extends Component {
         })
     }
 
-    getRandomString(separator){
+    getRandomString=(type, num, paragraphs)=>{
         let string = '';
-        for (let i = 0; i < number; i++) {
+        let separator = type==2 ? " " : ". ";
+        for (let i = 0; i < num; i++) {
             let randParagNum = Math.round(Math.random() * (paragraphs.length - 1)),
                 randParag = paragraphs[randParagNum];
-            let splitParag = randParag.split('. '),
+            let splitParag = randParag.split(separator),
                 randSentenceNum = Math.round(Math.random() * (splitParag.length - 2));      //last one is an empty string so -2
-            string = generatedText + splitParag[randSentenceNum] + separator
+            string = string + splitParag[randSentenceNum] + separator
 
         }
         return string
-    }
+    };
     generateIpsum = (number, type) => {
         const {paragraphs} = this.state;
         let generatedText, textToCopy;
@@ -148,8 +149,7 @@ class App extends Component {
                 break;
             }
             case  1: {                                           //sentences
-                generatedText = '';
-                generatedText = this.getRandomString('. ');
+                generatedText = this.getRandomString(type, number, paragraphs);
 
                 this.setState({
                     displayText: generatedText,
@@ -158,8 +158,7 @@ class App extends Component {
                 break;
             }
             case  2: {                                          //words
-                generatedText = '';
-                generatedText = this.getRandomString(' ');
+                generatedText = this.getRandomString(type, number, paragraphs);
                 this.setState({
                     displayText: generatedText,
                     textToCopy: generatedText,
