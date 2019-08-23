@@ -4,18 +4,23 @@
 }
 
 .app_body {
-@include Roboto;
+  @include Roboto;
   height: 400px;
   width: 735px;
   position: absolute;
   top: 11%;
   left: 18%;
-  background-image: url('./images/BorderArrows.png');
+  background-image: url("./images/BorderArrows.png");
   background-repeat: no-repeat;
   background-size: contain;
   padding: 2%;
 }
-
+.transparent{
+  color: yellow;
+}
+.visible{
+  color: red;
+}
 .text_output {
   height: 80%;
   font-size: 20px;
@@ -27,25 +32,37 @@
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
   }
-
   &::-webkit-scrollbar {
     width: 12px;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
   }
-
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: $MeaningfullRed;
+  }
+  .fadeIn{
+
+    animation: fadeIn 1s;
+
+    @keyframes fadeIn{
+
+      from{
+        opacity: 0;
+      }
+      to{
+        opacity: 1;
+      }
+    }
   }
 }
 
-.app_generate{
-  display:flex;
+.app_generate {
+  display: flex;
   justify-content: space-around;
-  width: 60%
+  width: 60%;
 }
 .app_management {
   margin: 0 auto;
@@ -56,7 +73,7 @@
   padding-top: 10px;
   border-top: 1px lightgrey solid;
 
-  input{
+  input {
     width: 30px;
     text-align: center;
   }
@@ -77,9 +94,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     text-indent: 1px;
-    text-overflow: '';
+    text-overflow: "";
     background: white;
-    @include Roboto
+    @include Roboto;
   }
 }
-
