@@ -8,7 +8,12 @@
 
 @import "components/footer/footer";
 
+body{
+  background: #f1f1f1;
+}
 #page{
   width: 100vw;
-  height: 92vh;
+  height: 89.5vh;
+  min-height: 710px;
+  background: white;
 }

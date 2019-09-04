@@ -1,3 +1,63 @@
+@media (max-width:1124px){
+  .main-width {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header.main-width {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    margin-left: 50px;
+    margin-top: 20px;
+  }
+  
+  .header_flex {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .header_logoArea {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    min-width: 450px;
+  
+    h1 {
+      padding: 20px;
+      min-width: 537px;
+      @include RulesFont;
+    }
+  
+    .header_bookmark {
+      min-width: 50px;
+      height: 120px;
+      background: $MeaningfullRed;
+    }
+  }
+  
+  .header_nav_container {
+    width: 40%;
+    min-width: 450px;
+  }
+  
+  .header_nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  
+    li {
+      display: inline-block;
+      @include RulesFont;
+      padding: 20px
+    }
+  }
+}
+
 .main-width {
   max-width: 1200px;
   margin: 0 auto;
@@ -33,7 +93,7 @@
   }
 
   .header_bookmark {
-    width: 50px;
+    min-width: 50px;
     height: 120px;
     background: $MeaningfullRed;
   }
