@@ -174,7 +174,6 @@ class App extends Component {
         this.setState({
           displayText: (
             <GeneratedParagraph
-              key={index}
               text={generatedText}
             />
           ),
@@ -188,7 +187,6 @@ class App extends Component {
         this.setState({
           displayText: (
             <GeneratedParagraph
-              key={index}
               text={generatedText}
             />
           ),
