@@ -4,7 +4,9 @@ Demo link: https://dantedoesdmg.github.io/React_Bootcamp_Final_Project_PetersonI
 
 ## Functionality:  
 
-1. Ipsum text generator using a custom made API, containing paragraphs from Jordan B. Petersons lectures
+1. Ipsum text generator using a custom made API, containing paragraphs from Jordan B. Petersons lectures.
+2. Generation of up to 20 paragraphs/sentences/words.
+3. Just like in traditional Lorem Ipsum, the first paragraph stays the same.
 
 ## Technology used:
 
