@@ -1,15 +1,11 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
 class GeneratedParagraph extends Component {
-  
-    state={
-        
-    }
-
-    render() {
+  render() {
     return (
-      <p className={this.checkForChange()} style={{ paddingBottom: "20px" }}>
-        {props.text}
+      <p className="fadeIn" style={{ paddingBottom: "20px" }}>
+        {this.props.text}
       </p>
     );
   }
@@ -17,7 +13,11 @@ class GeneratedParagraph extends Component {
 
 class TextOutput extends Component {
   render() {
-    return <div className={"text_output "}>{this.props.displayText} </div>;
+    return (
+      <div className="text_output">
+        {this.props.showText ? this.props.displayText : null}
+      </div>
+    );
   }
 }
 
@@ -107,24 +107,9 @@ class App extends Component {
     apiUrl: "https://petersonipsum.firebaseio.com/biblical.json",
     paragraphs: [],
     textToCopy:
-      "To stand up straight with your shoulders back is to accept the terrible responsibility of life, with eyes wide open. It means deciding to voluntarily transform the chaos of potential into the realities of habitable order. It means adopting the burden of self-conscious vulnerability, and accepting the end of the unconscious paradise of childhood, where finitude and mortality are only dimly comprehended. It means willingly undertaking the sacrifices necessary to generate a productive and meaningful reality (it means acting to please God, in the ancient language)"
+      "To stand up straight with your shoulders back is to accept the terrible responsibility of life, with eyes wide open. It means deciding to voluntarily transform the chaos of potential into the realities of habitable order. It means adopting the burden of self-conscious vulnerability, and accepting the end of the unconscious paradise of childhood, where finitude and mortality are only dimly comprehended. It means willingly undertaking the sacrifices necessary to generate a productive and meaningful reality (it means acting to please God, in the ancient language)",
+    textVisible: false
   };
-
-  componentDidMount() {
-    this.setState({
-      displayText: this.state.firstParagraph
-    });
-    fetch(this.state.apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          paragraphs: data.paragraphs
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
 
   getRandomString = (type, num, paragraphs) => {
     let string = "";
@@ -138,10 +123,25 @@ class App extends Component {
     }
     return string;
   };
+
+  textFadeIn = () => {
+    this.setState({
+      textVisible: false
+    });
+
+    let fadeIn = setTimeout(
+      () =>
+        this.setState({
+          textVisible: true
+        }),
+      10
+    );
+  };
   generateIpsum = (number, type) => {
     const { paragraphs } = this.state;
     let generatedText, textToCopy;
-
+    this.textFadeIn();
+    
     switch (type) {
       case 0: {
         //paragraphs
@@ -173,7 +173,12 @@ class App extends Component {
         generatedText = this.getRandomString(type, number, paragraphs);
 
         this.setState({
-          displayText: <GeneratedParagraph text={generatedText} />,
+          displayText: (
+            <GeneratedParagraph
+              key={Math.round(Math.random() * 200)}
+              text={generatedText}
+            />
+          ),
           textToCopy: generatedText
         });
         break;
@@ -182,7 +187,12 @@ class App extends Component {
         //words
         generatedText = this.getRandomString(type, number, paragraphs);
         this.setState({
-          displayText: <GeneratedParagraph text={generatedText} />,
+          displayText: (
+            <GeneratedParagraph
+              key={Math.round(Math.random() * 200)}
+              text={generatedText}
+            />
+          ),
           textToCopy: generatedText
         });
         break;
@@ -190,14 +200,33 @@ class App extends Component {
     }
   };
 
+  componentDidMount() {
+    this.setState({
+      displayText: this.state.firstParagraph,
+      textVisible: true
+    });
+    fetch(this.state.apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          paragraphs: data.paragraphs
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div className="app_body">
-        <TextOutput displayText={this.state.displayText} />
+        <TextOutput
+          displayText={this.state.displayText}
+          showText={this.state.textVisible}
+        />
         <Management
           textToCopy={this.state.textToCopy}
           setData={this.generateIpsum}
-          apiUrl={this.state.apiUrl}
         />
       </div>
     );

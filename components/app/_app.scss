@@ -44,11 +44,8 @@
     background-color: $MeaningfullRed;
   }
   .fadeIn{
-
     animation: fadeIn 1s;
-
     @keyframes fadeIn{
-
       from{
         opacity: 0;
       }
