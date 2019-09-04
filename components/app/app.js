@@ -141,7 +141,7 @@ class App extends Component {
     const { paragraphs } = this.state;
     let generatedText, textToCopy;
     this.textFadeIn();
-    
+
     switch (type) {
       case 0: {
         //paragraphs
@@ -175,7 +175,7 @@ class App extends Component {
         this.setState({
           displayText: (
             <GeneratedParagraph
-              key={Math.round(Math.random() * 200)}
+              key={index}
               text={generatedText}
             />
           ),
@@ -189,7 +189,7 @@ class App extends Component {
         this.setState({
           displayText: (
             <GeneratedParagraph
-              key={Math.round(Math.random() * 200)}
+              key={index}
               text={generatedText}
             />
           ),
