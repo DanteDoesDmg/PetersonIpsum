@@ -40,6 +40,8 @@
   "dependencies": {
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
     "whatwg-fetch": "^3.0.0"
   }
 }
