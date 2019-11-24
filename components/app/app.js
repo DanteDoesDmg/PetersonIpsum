@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {ConnectedManagement} from "./configure"
 
 class GeneratedParagraph extends Component {
   render() {
@@ -20,91 +21,89 @@ class TextOutput extends Component {
   }
 }
 
-class Management extends Component {
-  state = {
-    numberOf: 5,
-    type: ["paragraphs", "sentences", "words"],
-    selected: "0"
-  };
+// class Management extends Component {
+//   state = {
+//     numberOf: 5,
+//     type: ["paragraphs", "sentences", "words"],
+//     selected: "0"
+//   };
 
-  handleNumChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value.replace(/\D/g, "")
-    });
-    if (Number(e.target.value) > 20) {
-      this.setState({
-        [e.target.name]: 20
-      });
-    } else if (Number(e.target.value) < 0) {
-      this.setState({
-        [e.target.name]: 0
-      });
-    }
-  };
+//   handleNumChange = e => {
+//     this.setState({
+//       [e.target.name]: e.target.value.replace(/\D/g, "")    //remove non digit characters
+//     });
+//     if (Number(e.target.value) > 20) {
+//       this.setState({
+//         [e.target.name]: 20
+//       });
+//     } else if (Number(e.target.value) < 0) {
+//       this.setState({
+//         [e.target.name]: 0
+//       });
+//     }
+//   };
 
-  handleOptionChange = e => {
-    this.setState({
-      selected: e.target.value
-    });
-  };
+//   handleOptionChange = e => {
+//     this.setState({
+//       selected: e.target.value
+//     });
+//   };
 
-  copyIpsum = () => {
-    if (document.querySelectorAll(".tempInput").length === 0) {
-      let tempInput = document.createElement("textarea");
+//   copyIpsum = () => {
+//     if (document.querySelectorAll(".tempInput").length === 0) {
+//       let tempInput = document.createElement("textarea");
 
-      tempInput.classList.add("tempInput");
-      tempInput.style.position = "absolute";
-      tempInput.style.opacity = "0";
-      document.body.appendChild(tempInput);
+//       tempInput.classList.add("tempInput");
+//       tempInput.style.position = "absolute";
+//       tempInput.style.opacity = "0";
+//       document.body.appendChild(tempInput);
 
-      tempInput.setAttribute("wrap", "hard");
-      tempInput.value = this.props.textToCopy;
-      tempInput.select();
-      document.execCommand("copy");
-      document.body.removeChild(tempInput);
-    }
-  };
+//       tempInput.setAttribute("wrap", "hard");
+//       tempInput.value = this.props.textToCopy;
+//       tempInput.select();
+//       document.execCommand("copy");
+//       document.body.removeChild(tempInput);
+//     }
+//   };
 
-  generateClick = () => {
-    const { numberOf, selected } = this.state;
-    this.props.setData(numberOf, Number(selected));
-  };
+//   generateClick = () => {
+//     const { numberOf, selected } = this.state;
+//     this.props.setData(numberOf, Number(selected));
+//   };
 
-  render() {
-    return (
-      <div className="app_management">
-        <div className="app_generate">
-          <input
-            type="text"
-            name="numberOf"
-            value={this.state.numberOf}
-            onChange={this.handleNumChange}
-          />
-          <select
-            value={this.state.selected}
-            onChange={this.handleOptionChange}
-          >
-            <option value="0">{this.state.type[0]}</option>
-            <option value="1">{this.state.type[1]}</option>
-            <option value="2">{this.state.type[2]}</option>
-          </select>
-          <button onClick={this.generateClick}>Generate!</button>
-        </div>
-        <button onClick={this.copyIpsum}>
-          <i className="far fa-copy" /> Copy
-        </button>
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div className="app_management">
+//         <div className="app_generate">
+//           <input
+//             type="text"
+//             name="numberOf"
+//             value={this.state.numberOf}
+//             onChange={this.handleNumChange}
+//           />
+//           <select
+//             value={this.state.selected}
+//             onChange={this.handleOptionChange}
+//           >
+//             <option value="0">{this.state.type[0]}</option>
+//             <option value="1">{this.state.type[1]}</option>
+//             <option value="2">{this.state.type[2]}</option>
+//           </select>
+//           <button onClick={this.generateClick}>Generate!</button>
+//         </div>
+//         <button onClick={this.copyIpsum}>
+//           <i className="far fa-copy" /> Copy
+//         </button>
+//       </div>
+//     );
+//   }
+// }
 
 class App extends Component {
   state = {
     firstParagraph:
       "To stand up straight with your shoulders back is to accept the terrible responsibility of life, with eyes wide open. It means deciding to voluntarily transform the chaos of potential into the realities of habitable order. It means adopting the burden of self-conscious vulnerability, and accepting the end of the unconscious paradise of childhood, where finitude and mortality are only dimly comprehended. It means willingly undertaking the sacrifices necessary to generate a productive and meaningful reality (it means acting to please God, in the ancient language)",
     displayText: "",
-    apiUrl: "https://petersonipsum.firebaseio.com/biblical.json",
-    paragraphs: [],
     textToCopy:
       "To stand up straight with your shoulders back is to accept the terrible responsibility of life, with eyes wide open. It means deciding to voluntarily transform the chaos of potential into the realities of habitable order. It means adopting the burden of self-conscious vulnerability, and accepting the end of the unconscious paradise of childhood, where finitude and mortality are only dimly comprehended. It means willingly undertaking the sacrifices necessary to generate a productive and meaningful reality (it means acting to please God, in the ancient language)",
   };
@@ -136,7 +135,8 @@ class App extends Component {
     );
   };
   generateIpsum = (number, type) => {
-    const { paragraphs } = this.state;
+    console.log(this.props)
+    const { paragraphs } = this.props;
     let generatedText, textToCopy;
     this.textFadeIn();
 
@@ -197,20 +197,11 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.props.fetchText()
     this.setState({
       displayText: this.state.firstParagraph,
       textVisible: true
     });
-    fetch(this.state.apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          paragraphs: data.paragraphs
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   render() {
@@ -220,7 +211,7 @@ class App extends Component {
           displayText={this.state.displayText}
           showText={this.state.textVisible}
         />
-        <Management
+        <ConnectedManagement
           textToCopy={this.state.textToCopy}
           setData={this.generateIpsum}
         />
