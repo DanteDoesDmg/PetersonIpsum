@@ -17,7 +17,6 @@ export default function reducer(state = initialState, {type, payload}){
             }
         }
         default:{
-            console.log('redux works somehow')
             return state
         }
     }

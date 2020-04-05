@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {ConnectedManagement} from "./configure"
+import { ConnectedManagement } from "./configure";
 
 class GeneratedParagraph extends Component {
   render() {
@@ -21,84 +21,6 @@ class TextOutput extends Component {
   }
 }
 
-// class Management extends Component {
-//   state = {
-//     numberOf: 5,
-//     type: ["paragraphs", "sentences", "words"],
-//     selected: "0"
-//   };
-
-//   handleNumChange = e => {
-//     this.setState({
-//       [e.target.name]: e.target.value.replace(/\D/g, "")    //remove non digit characters
-//     });
-//     if (Number(e.target.value) > 20) {
-//       this.setState({
-//         [e.target.name]: 20
-//       });
-//     } else if (Number(e.target.value) < 0) {
-//       this.setState({
-//         [e.target.name]: 0
-//       });
-//     }
-//   };
-
-//   handleOptionChange = e => {
-//     this.setState({
-//       selected: e.target.value
-//     });
-//   };
-
-//   copyIpsum = () => {
-//     if (document.querySelectorAll(".tempInput").length === 0) {
-//       let tempInput = document.createElement("textarea");
-
-//       tempInput.classList.add("tempInput");
-//       tempInput.style.position = "absolute";
-//       tempInput.style.opacity = "0";
-//       document.body.appendChild(tempInput);
-
-//       tempInput.setAttribute("wrap", "hard");
-//       tempInput.value = this.props.textToCopy;
-//       tempInput.select();
-//       document.execCommand("copy");
-//       document.body.removeChild(tempInput);
-//     }
-//   };
-
-//   generateClick = () => {
-//     const { numberOf, selected } = this.state;
-//     this.props.setData(numberOf, Number(selected));
-//   };
-
-//   render() {
-//     return (
-//       <div className="app_management">
-//         <div className="app_generate">
-//           <input
-//             type="text"
-//             name="numberOf"
-//             value={this.state.numberOf}
-//             onChange={this.handleNumChange}
-//           />
-//           <select
-//             value={this.state.selected}
-//             onChange={this.handleOptionChange}
-//           >
-//             <option value="0">{this.state.type[0]}</option>
-//             <option value="1">{this.state.type[1]}</option>
-//             <option value="2">{this.state.type[2]}</option>
-//           </select>
-//           <button onClick={this.generateClick}>Generate!</button>
-//         </div>
-//         <button onClick={this.copyIpsum}>
-//           <i className="far fa-copy" /> Copy
-//         </button>
-//       </div>
-//     );
-//   }
-// }
-
 class App extends Component {
   state = {
     firstParagraph:
@@ -109,12 +31,12 @@ class App extends Component {
   };
 
   getRandomString = (type, num, paragraphs) => {
-    let string = "";
-    let separator = type == 2 ? " " : ". ";
+    const string = "";
+    const separator = type == 2 ? " " : ". ";
     for (let i = 0; i < num; i++) {
-      let randParagNum = Math.round(Math.random() * (paragraphs.length - 1)),
+      const randParagNum = Math.round(Math.random() * (paragraphs.length - 1)),
         randParag = paragraphs[randParagNum];
-      let splitParag = randParag.split(separator),
+      const splitParag = randParag.split(separator),
         randSentenceNum = Math.round(Math.random() * (splitParag.length - 2)); //last one is an empty string so -2
       string = string + splitParag[randSentenceNum] + separator;
     }
@@ -123,19 +45,18 @@ class App extends Component {
 
   textFadeIn = () => {
     this.setState({
-      textVisible: false
+      textVisible: false,
     });
 
-    let fadeIn = setTimeout(
+    const fadeIn = setTimeout(
       () =>
         this.setState({
-          textVisible: true
+          textVisible: true,
         }),
       10
     );
   };
-  generateIpsum = (number, type) => {
-    console.log(this.props)
+  generateIpsum = (amount, type) => {
     const { paragraphs } = this.props;
     let generatedText, textToCopy;
     this.textFadeIn();
@@ -146,13 +67,13 @@ class App extends Component {
         generatedText = [this.state.firstParagraph];
         textToCopy = generatedText;
 
-        if (number === 1) {
+        if (amount === 1) {
           this.setState({
-            displayText: generatedText
+            displayText: generatedText,
           });
         } else {
-          for (let i = 1; i < number; i++) {
-            let randNum = Math.round(Math.random() * (paragraphs.length - 1));
+          for (let i = 1; i < amount; i++) {
+            const randNum = Math.round(Math.random() * (paragraphs.length - 1));
             generatedText.push(paragraphs[randNum]);
             textToCopy = textToCopy + "\r\n \r\n" + paragraphs[randNum];
           }
@@ -161,35 +82,27 @@ class App extends Component {
           });
           this.setState({
             displayText: generatedText,
-            textToCopy: textToCopy
+            textToCopy: textToCopy,
           });
         }
         break;
       }
       case 1: {
         //sentences
-        generatedText = this.getRandomString(type, number, paragraphs);
+        generatedText = this.getRandomString(type, amount, paragraphs);
 
         this.setState({
-          displayText: (
-            <GeneratedParagraph
-              text={generatedText}
-            />
-          ),
-          textToCopy: generatedText
+          displayText: <GeneratedParagraph text={generatedText} />,
+          textToCopy: generatedText,
         });
         break;
       }
       case 2: {
         //words
-        generatedText = this.getRandomString(type, number, paragraphs);
+        generatedText = this.getRandomString(type, amount, paragraphs);
         this.setState({
-          displayText: (
-            <GeneratedParagraph
-              text={generatedText}
-            />
-          ),
-          textToCopy: generatedText
+          displayText: <GeneratedParagraph text={generatedText} />,
+          textToCopy: generatedText,
         });
         break;
       }
@@ -197,10 +110,10 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchText()
+    this.props.fetchText();
     this.setState({
       displayText: this.state.firstParagraph,
-      textVisible: true
+      textVisible: true,
     });
   }
 

@@ -23,15 +23,15 @@ export default class Management extends Component {
   };
 
   handleOptionChange = e => {
+    console.log(e.target.selectedIndex)
     this.setState({
       selected: e.target.value
     });
   };
 
   copyIpsum = () => {
-    console.log(this.props)
     if (document.querySelectorAll(".tempInput").length === 0) {
-      let tempInput = document.createElement("textarea");
+      const tempInput = document.createElement("textarea");
 
       tempInput.classList.add("tempInput");
       tempInput.style.position = "absolute";
